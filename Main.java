@@ -24,7 +24,7 @@ public class Main {
         // COMPLETARE IL CODICE
 
 
-        // Calcolo della somma degli elementi
+        // Calcolo della somma degli elementi 
         int sum = calculateSum(matrix);
         System.out.println("Somma degli elementi: " + sum);
 
