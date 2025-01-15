@@ -14,53 +14,88 @@ public class Main {
     public static void main(String[] args) {
         // Creazione e popolamento della matrice
         int[][] matrix = new int[3][3];
-        Random random = new Random();
-
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                matrix[i][j] = random.nextInt(100); // Numeri casuali tra 0 e 99
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                matrix[i][j] = (int)(Math.random() * 10 + 1); // Popola la matrice con numeri casuali tra 1 e 10
             }
         }
-      
+
         // Stampa della matrice
         System.out.println("Matrice:");
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                System.out.print(matrix[i][j] + "\t");
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.print(matrix[i][j] + " ");
             }
             System.out.println();
         }
 
-        // Calcolo della somma degli elementi 
+        // Calcolo della somma degli elementi
         int sum = calculateSum(matrix);
         System.out.println("Somma degli elementi: " + sum);
 
-        // Ricerca del valore massimo
-        int max = findMax(matrix);
-        System.out.println("Valore massimo: " + max);
+          // Ricerca del valore massimo
+          int[] max = findMax(matrix);
+          System.out.println("Valore massimo: " + max[0]);
+          System.out.println("Coordinate del massimo: (" + max[1] + ", " + max[2] + ")");
+  
+          // Ricerca numero di pari e dispari
+          int pari = contNump(matrix);
+          System.out.println("Nella matrice ci sono: " + pari + " numeri pari");
+  
+          int dispari = contNumd(matrix);
+          System.out.println("Nella matrice ci sono: " + dispari + " numeri dispari");
     }
-
-    public static int calculateSum(int[][] matrix) {
-        int sum = 0;
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                sum += matrix[i][j];
-            }
-        }
-      
+            // Metodo per calcolare la somma degli elementi della matrice
+            public static int calculateSum(int[][] matrix) {
+                int sum = 0;
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        sum += matrix[i][j];
+                    }
+                }
         return sum;
     }
 
-    public static int findMax(int[][] matrix) {
+    // Metodo per trovare il valore massimo nella matrice e le sue coordinate
+    public static int[] findMax(int[][] matrix) {
         int max = matrix[0][0];
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
+        int posx = 0;
+        int posy = 0;
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
                 if (matrix[i][j] > max) {
                     max = matrix[i][j];
+                    posx = i;
+                    posy = j;
                 }
             }
         }
-      
-        return max;
+        return new int[] { max, posx, posy };
+    }
+       // Metodo per contare i numeri pari nella matrice
+       public static int contNump(int[][] matrix) {
+        int contp = 0;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (matrix[i][j] % 2 == 0) {
+                    contp+=1;
+                }
+            }
+        }
+        return contp;
+    }
+
+    // Metodo per contare i numeri dispari nella matrice
+    public static int contNumd(int[][] matrix) {
+        int contd = 0;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (matrix[i][j] % 2 != 0) {
+                    contd+=1;
+                }
+            }
+        }
+        return contd;
     }
 }
